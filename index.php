@@ -4,7 +4,202 @@
 	html5up.net | @ajlkn
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 -->
+
+
 <html>
+<?php 
+    
+    $unemployment = $_POST["unemployment"];
+    $density = $_POST["density"];
+    $income = $_POST["lowincome"];
+    $cpi = $_POST["cpi"];
+    $emissions = $_POST["emissions"];
+
+    $points = getPoints($unemployment, $density, $income, $cpi, $emissions);
+    echo "$points";
+?>
+
+<?php 
+
+function unemploymentClass($unem){
+    $points =0;
+    if($unem >= 4.6 && $unem <= 5.7 ){
+        
+        $points =2;
+    }
+    elseif(($unem > 3.10 && $unem < 4.6) || ($unem >5.7 && $unem < 6)){
+        $points =1;
+    }
+    elseif(is_int($unem) == false){
+        print("invalid type");
+    }
+    else{
+        $points =0;
+    }
+    return $points;
+}
+function popDensity($pop){
+    $points =0;
+    if($pop >= 1173 && $pop <= 4916){
+        $points =2;
+    }
+    elseif(($pop >=317 && $pop <1173) || $pop >4916 && $pop <= 5493){
+        $points =1;
+    }
+    elseif($pop >0){
+        $points =0;
+    }
+    else{
+        print("invalid entry");
+    }
+    return $points;
+}
+function incomeClass($income){
+    if($income >=13.9 && $income <= 19.9){
+        $points =2;
+    }
+    elseif(($income >11 && $income <13.9)|| $income >19.9 && $income <20.1){
+        $points =1;
+    }
+    elseif($income>0){
+        $points =0;
+    }
+    else{
+        echo "invalid entry";
+    }
+    return $points;
+}
+function cpiClass($cpi){
+    if($cpi >=133.3 && $cpi<= 136.7){
+        $point =2;
+    }
+    elseif(($cpi >130.9 && $cpi < 133.3)|| ($cpi >136.7 && $cpi <= 139.9)){
+        $point = 1;
+    }
+    elseif($cpi>0){
+        $point =0;
+    }
+    else{
+        print("invalid number");
+    }
+    return $point;
+
+}
+function emissionsClass($emissions){
+    $point =0;
+    if($emissions >= 4.505 && $emissions <= 5.081 ){
+        $point =2;
+    }
+    elseif(($emissions >= 4.474 && $emissions < 4.505) ||$emissions > 5.081 && $emissions <= 5.260 )
+    {
+        $point =1;
+    }
+    elseif(($emissions>0)){
+        $point = 0;
+    }
+    else{
+        print("invalid number");
+    }
+    return $point;
+}
+function getPoints($unem, $density, $income, $cpi, $emissions){
+    $points= 0;
+    $points += unemploymentClass($unem); 
+    $points += popDensity($density);
+    $points += incomeClass($income);
+    $points += cpiClass($cpi);
+    $points += emissionsClass($emissions);
+
+    return $points;
+}
+?>
+<script type = "text/javascript">
+
+function changeBar(points){
+    
+    console.log(points);
+
+    if( points == 1){
+        document.getElementById('#block10').style.backgroundcolor = "red";
+    }
+    else if(points ==2){
+        document.getElementById('#block10').style.backgroundcolor = "red";
+        document.getElementById('#block9').style.backgroundcolor = "red";
+    }
+    else if(points ==3){
+        document.getElementById('#block10').style.backgroundcolor = "red";
+        document.getElementById('#block9').style.backgroundcolor = "red";
+        document.getElementById('#block8').style.backgroundcolor = "red";
+    }
+    else if(points == 4){
+        document.getElementById('#block10').style.backgroundcolor = "red";
+        document.getElementById('#block9').style.backgroundcolor = "red";
+        document.getElementById('#block8').style.backgroundcolor = "red";
+        document.getElementById('#block7').style.backgroundcolor = "yellow";
+    }
+    else if(points ==5){
+        document.getElementById('#block10').style.backgroundcolor = "red";
+        document.getElementById('#block9').style.backgroundcolor = "red";
+        document.getElementById('#block8').style.backgroundcolor = "red";
+        document.getElementById('#block7').style.backgroundcolor = "yellow";
+        document.getElementById('#block6').style.backgroundcolor = "yellow";
+    }
+    else if(points ==6){
+        document.getElementById('#block10').style.backgroundcolor = "red";
+        document.getElementById('#block9').style.backgroundcolor = "red";
+        document.getElementById('#block8').style.backgroundcolor = "red";
+        document.getElementById('#block7').style.backgroundcolor = "yellow";
+        document.getElementById('#block6').style.backgroundcolor = "yellow";
+        document.getElementById('#block5').style.backgroundcolor = "yellow";
+    }
+    else if(points ==7){
+        document.getElementById('#block10').style.backgroundcolor = "red";
+        document.getElementById('#block9').style.backgroundcolor = "red";
+        document.getElementById('#block8').style.backgroundcolor = "red";
+        document.getElementById('#block7').style.backgroundcolor = "yellow";
+        document.getElementById('#block6').style.backgroundcolor = "yellow";
+        document.getElementById('#block5').style.backgroundcolor = "yellow";
+        document.getElementById('#block4').style.backgroundcolor = "yellow";
+    }
+    else if(points ==8){
+        document.getElementById('#block10').style.backgroundcolor = "red";
+        document.getElementById('#block9').style.backgroundcolor = "red";
+        document.getElementById('#block8').style.backgroundcolor = "red";
+        document.getElementById('#block7').style.backgroundcolor = "yellow";
+        document.getElementById('#block6').style.backgroundcolor = "yellow";
+        document.getElementById('#block5').style.backgroundcolor = "yellow";
+        document.getElementById('#block4').style.backgroundcolor = "yellow";
+        document.getElementById('#block3').style.backgroundcolor = "green";
+    }
+    else if(points ==9){
+        document.getElementById('#block10').style.backgroundcolor = "red";
+        document.getElementById('#block9').style.backgroundcolor = "red";
+        document.getElementById('#block8').style.backgroundcolor = "red";
+        document.getElementById('#block7').style.backgroundcolor = "yellow";
+        document.getElementById('#block6').style.backgroundcolor = "yellow";
+        document.getElementById('#block5').style.backgroundcolor = "yellow";
+        document.getElementById('#block4').style.backgroundcolor = "yellow";
+        document.getElementById('#block3').style.backgroundcolor = "green";
+        document.getElementById('#block2').style.backgroundcolor = "green";
+    }
+    else if(points ==10){
+        document.getElementById('#block10').style.backgroundcolor = "red";
+        document.getElementById('#block9').style.backgroundcolor = "red";
+        document.getElementById('#block8').style.backgroundcolor = "red";
+        document.getElementById('#block7').style.backgroundcolor = "yellow";
+        document.getElementById('#block6').style.backgroundcolor = "yellow";
+        document.getElementById('#block5').style.backgroundcolor = "yellow";
+        document.getElementById('#block4').style.backgroundcolor = "yellow";
+        document.getElementById('#block3').style.backgroundcolor = "green";
+        document.getElementById('#block2').style.backgroundcolor = "green";
+        document.getElementById('#block1').style.backgroundcolor = "green";
+    }
+    else{
+        
+    }
+}
+</script>
+
 	<head>
 		<title>Smart Cities Classification</title>
 		<meta charset="utf-8" />
@@ -85,31 +280,31 @@
 				<!-- One -->
 					<section id="one" class="wrapper style2 spotlights">
 						<section>
-							<a href="#" class="image"><img src="images/pic01.jpg" alt="" data-position="center center" /></a>
+							<a href="#" class="image"><img src="https://raw.githubusercontent.com/Marco-Cen/Candev2020/master/Graph.png" alt="" data-position="center center" /></a>
 							<div class="content">
 								<div class="inner">
-									<h2>Sed ipsum dolor</h2>
-									<p>Phasellus convallis elit id ullamcorper pulvinar. Duis aliquam turpis mauris, eu ultricies erat malesuada quis. Aliquam dapibus.</p>
+									<h2>Smart City Indicators</h2>
+									<p>One of the greatest challenges in predicting early smart city adopters is evaluating the number of factors and weighting their influence.</p>
 									
 								</div>
 							</div>
 						</section>
 						<section>
-							<a href="#" class="image"><img src="images/pic02.jpg" alt="" data-position="top center" /></a>
+							<a href="#" class="image"><img src="https://raw.githubusercontent.com/Marco-Cen/Candev2020/master/Unemployment%20rate.png" alt="" data-position="top center" /></a>
 							<div class="content">
 								<div class="inner">
-									<h2>Feugiat consequat</h2>
-									<p>Phasellus convallis elit id ullamcorper pulvinar. Duis aliquam turpis mauris, eu ultricies erat malesuada quis. Aliquam dapibus.</p>
+									<h2>Unemployment Rate</h2>
+									<p>These examples of smart cities share a low unemployment rate, as shown in the boxplot.</p>
 									
 								</div>
 							</div>
 						</section>
 						<section>
-							<a href="#" class="image"><img src="images/pic03.jpg" alt="" data-position="25% 25%" /></a>
+							<a href="#" class="image"><img src="https://raw.githubusercontent.com/Marco-Cen/Candev2020/master/Lowincome.png" alt="" data-position="25% 25%" /></a>
 							<div class="content">
 								<div class="inner">
-									<h2>Ultricies aliquam</h2>
-									<p>Phasellus convallis elit id ullamcorper pulvinar. Duis aliquam turpis mauris, eu ultricies erat malesuada quis. Aliquam dapibus.</p>
+									<h2>Low Income</h2>
+									<p>A smart city tends to have a lower percentage of households considered to hold low-income status.</p>
 									
 								</div>
 							</div>
@@ -138,26 +333,44 @@
 								<div id="block10"></div>
 							</div>
 					 
-							<form class ="values" action ="assets/functions.php" method ="POST">
-								<label><input type = "text" id="pop" placeholder= "Enter your city's population"></label>
-							 <label><input type = "text" id ="firstval" value = "" maxlength="100" ></label>
-							 <label><input type = "text" id ="secondval" value = "" maxlength="100"></label>
-							 <label><input type = "text" id= "thirdval" value = "" maxlength="100"></label>
-							<label><input type = "submit"></label>
-					 </form>
+							<form class ="values" action ="#" method ="POST" onsubmit ="changeBar(points)">
+							 <label><input type = "text" id ="firstval" name ="unemployment" placeholder = "Enter your city's unemployment rate ()" maxlength="100" ></label>
+							 <label><input type = "text" id ="secondval" name = "density" placeholder = "Enter your city's population density" maxlength="100"></label>
+                             <label><input type = "text" id= "thirdval" name ="lowincome" placeholder = "Enter your city's % of low income households (50% below the median income)" maxlength="100"></label>
+                             <label><input type = "text" id= "fourthval" name="cpi" placeholder = "Enter your city's CPI" maxlength="100"></label>
+                             <label><input type = "text" id= "fifthval" name="emissions" placeholder = "Enter your city's CO2 and electricity emmisions" maxlength="100"></label>
+                            <label><input type = "submit"></label>
+                
+                     </form>
+                     <script> var points = <?php echo $points;?> </script>
+                     <h3>How it works:</h3>       
+                     <p>This is a 10 point scale</p>
 							
-							
-							<ul class="actions">
-								<li><a href="generic.html" class="button">Learn more</a></li>
-							</ul>
 						</div>
 					</section>
 
 				<!-- Three -->
 					<section id="three" class="wrapper style1 fade-up">
 						<div class="inner">
-							<h2>Get in touch</h2>
-							<p>Phasellus convallis elit id ullamcorper pulvinar. Duis aliquam turpis mauris, eu ultricies erat malesuada quis. Aliquam dapibus, lacus eget hendrerit bibendum, urna est aliquam sem, sit amet imperdiet est velit quis lorem.</p>
+							<h2>What's missing?</h2>
+                            <p>Statistics we would have liked to use if they were available: </p>
+                            <ul>
+                                <li>% of the population that is Indiginous</li>
+                                <li>ANY statistics on transportation on a city-city level</li>
+                                <li>Ease of property rights</li>
+                                <li>City funding/ distribution of resources</li>
+                                <li>
+                                
+                            </ul>
+                            <h4>Challenge: We do not have the 30 pieces of data to show normal distribution, however, because we are working with population data 
+                                we assumed that it will fall into normal distribution.
+                            </h4>
+                            <h4>Challenge 2: We recognize that some factors play a more important role than others, however due to time contraints we weren't available
+                                to create an accurate algorithm to account for this. Therefore in the model, each factor is weighted the same.
+                            </h4>
+                            <p>We believe that the ISO standards for classifying smart cities takes into consideration a lot of good data sets,
+                                however, these are some we would have liked to see where the corelation lies with respect to a city's potential to be "Smart"
+                            </p>
 							<div class="split style1">
 								<section>
 									
@@ -188,5 +401,6 @@
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
 
-	</body>
+    </body>
+   
 </html>
