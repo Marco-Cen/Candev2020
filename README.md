@@ -13,3 +13,4 @@ Team Members:
 
 Description:
 SmartCity Analysis is a web application that defines and classifies a city's current 'smart' city potential, based on a statistical grading system. 
+http://smartcityanalysis.000webhostapp.com/
